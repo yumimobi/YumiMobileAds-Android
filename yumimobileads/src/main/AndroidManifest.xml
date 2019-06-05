@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yumi.api.yumimobiads">
+
+    <application>
+        <activity
+            android:name="com.yumi.android.mobile.ads.publish.YumiBanner"
+            android:label="@string/title_activity_yumi_banner"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>
