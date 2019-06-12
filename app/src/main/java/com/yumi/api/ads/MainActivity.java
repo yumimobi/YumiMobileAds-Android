@@ -1,52 +1,61 @@
 package com.yumi.api.ads;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.CompoundButton;
 
-public class MainActivity extends AppCompatActivity {
+import com.mopub.common.MoPub;
+import com.mopub.common.SdkConfiguration;
+import com.mopub.common.SdkInitializationListener;
+import com.yumi.api.ads.mopubdemo.MopubBannerActivity;
+import com.yumi.api.ads.mopubdemo.MopubInterstitialActivity;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    private Button bannerAd;
+    private Button interstitialAd;
+
+    public static final String MOPUB_UNIT_ID_BANNER = "cd457c5812c84bffaf0d0b328f0af8db";
+    public static final String MOPUB_UNIT_ID_INTERSTITIAL = "6fc41aae3e704bac9aacd95ef3081ab5";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        bannerAd = (Button) findViewById(R.id.bannerAd);
+        interstitialAd = (Button) findViewById(R.id.interstitialAd);
+        bannerAd.setOnClickListener(this);
+        interstitialAd.setOnClickListener(this);
+
+        final SdkConfiguration.Builder configBuilder = new SdkConfiguration.Builder(MOPUB_UNIT_ID_BANNER);
+        MoPub.initializeSdk(this, configBuilder.build(), new SdkInitializationListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onInitializationFinished() {
             }
         });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.bannerAd:
+                intent.setClass(MainActivity.this, MopubBannerActivity.class);
+                break;
+            case R.id.interstitialAd:
+                intent.setClass(MainActivity.this, MopubInterstitialActivity.class);
+                break;
+            default:
+                break;
+        }
+        startActivity(intent);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
