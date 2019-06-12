@@ -45,7 +45,7 @@ ext {
 
     publishedGroupId = 'com.yumimobi.ads'
     artifactId = project.name
-    libraryVersion = ""
+    libraryVersion = "0.1.0"
     libraryName = project.name
     libraryDescription = 'Yumi mobile adx sdk'
 
