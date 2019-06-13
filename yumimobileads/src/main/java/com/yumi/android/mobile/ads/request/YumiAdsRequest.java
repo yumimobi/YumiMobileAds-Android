@@ -12,7 +12,6 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.yumi.android.mobile.ads.beans.YumiResponseBean;
 import com.yumi.android.mobile.ads.constants.YumiMobileAPIList;
-import com.yumi.android.mobile.ads.publish.enumbean.BannerAdSize;
 import com.yumi.android.mobile.ads.publish.enumbean.AdType;
 import com.yumi.android.mobile.ads.utils.ZplayDebug;
 import com.yumi.android.mobile.ads.utils.device.PhoneInfoGetter;
@@ -84,7 +83,7 @@ public class YumiAdsRequest extends YumiRequest<YumiResponseBean> {
             String requestParams = parme.toString();
             return requestParams.getBytes();
         } catch (Exception e) {
-            ZplayDebug.e_m(TAG, "广告数据不合法", e, onoff);
+            ZplayDebug.e_m(TAG, "requset data error ", e, onoff);
             return new byte[0];
         }
     }

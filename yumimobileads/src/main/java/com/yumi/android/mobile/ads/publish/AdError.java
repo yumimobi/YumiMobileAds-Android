@@ -10,7 +10,6 @@ import java.util.Locale;
 /**
  * Description:
  * <p>
- * Created by lgd on 2019-04-24.
  */
 public class AdError {
     private final ErrorCode mErrorCode;
@@ -18,11 +17,6 @@ public class AdError {
 
     public AdError(@NonNull ErrorCode errorCode) {
         mErrorCode = errorCode;
-    }
-
-    public AdError(ErrorCode layerErrorCode, String errorMessage) {
-        this(layerErrorCode);
-        mErrorMessage = errorMessage;
     }
 
     public void setErrorMessage(String errorMessage) {

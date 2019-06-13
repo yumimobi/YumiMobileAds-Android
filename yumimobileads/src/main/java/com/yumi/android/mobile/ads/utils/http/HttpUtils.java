@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import com.yumi.android.mobile.ads.utils.ZplayDebug;
 
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Map;
 
 /**
@@ -29,7 +28,7 @@ public class HttpUtils {
         mStringParams = stringParams;
         mContext = context;
 
-        // 判断是http请求还是https请求
+        // check is http or https
         try {
             URL httpUrl = new URL(mUrl);
             if (httpUrl.getProtocol().toLowerCase().equals("https")) {
@@ -51,74 +50,6 @@ public class HttpUtils {
         return new HttpUtils(context, url, stringParams, callback);
     }
 
-    /**
-     * 构造形如"params1=values1&params2=values2..."形式的字符串
-     *
-     * @param keys   参数名
-     * @param values 参数值
-     * @return
-     */
-    public static String buildPostParams(String[] keys, String[] values) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            if (keys != null && keys.length > 0) {
-                for (int i = 0; i < keys.length; i++) {
-                    sb.append(keys[i]).append("=").append(URLEncoder.encode(values[i], "utf-8")).append("&");
-                }
-                sb.deleteCharAt(sb.length() - 1);
-            }
-        } catch (Exception e) {
-            ZplayDebug.e_m(TAG, "buildParams error: ", e, onoff);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 构造形如"?params1=values1&params2=values2..."形式的字符串
-     *
-     * @param keys   参数名
-     * @param values 参数值
-     * @return
-     */
-    public static String buildGetParams(String[] keys, String[] values) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            if (keys != null && keys.length > 0) {
-                // sb2中数据应该是URLEncode以后的"?a=1&b=2&c=3"
-                for (int i = 0; i < keys.length; i++) {
-                    sb.append(keys[i]).append("=").append(URLEncoder.encode(values[i], "utf-8")).append("&");
-                }
-                sb.deleteCharAt(sb.length() - 1);
-            }
-        } catch (Exception e) {
-            ZplayDebug.e_m(TAG, "buildParams error: ", e, onoff);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 构造形如"?params1=values1&params2=values2..."形式的字符串, 参数value不编码
-     *
-     * @param keys   参数名
-     * @param values 参数值
-     * @return
-     */
-    public static String buildGetParamsNotEncode(String[] keys, String[] values) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            if (keys != null && keys.length > 0) {
-                // sb2中数据应该是URLEncode以后的"?a=1&b=2&c=3"
-                for (int i = 0; i < keys.length; i++) {
-                    sb.append(keys[i]).append("=").append(values[i]).append("&");
-                }
-                sb.deleteCharAt(sb.length() - 1);
-            }
-        } catch (Exception e) {
-            ZplayDebug.e_m(TAG, "buildParams error: ", e, onoff);
-        }
-        return sb.toString();
-    }
-
     public static String getResultData(final Map<String, Object> result) {
         try {
             return (String) result.get("data");
@@ -137,17 +68,8 @@ public class HttpUtils {
         return 0;
     }
 
-    public static String getResultMsg(final Map<String, Object> result) {
-        try {
-            return (String) result.get("msg");
-        } catch (Exception e) {
-            ZplayDebug.e_m(TAG, "getResultStatus error: ", e, onoff);
-        }
-        return "";
-    }
-
     /**
-     * 执行Get请求
+     * execute Get request
      */
     public void executeHttpGet() {
         mType = HTTP_TYPE.GET;
@@ -161,45 +83,11 @@ public class HttpUtils {
         httpAccess(null);
     }
 
-    /**
-     * 执行Post请求
-     */
-    public void executeHttpPost() {
-        mType = HTTP_TYPE.POST;
-        httpAccess(null);
-    }
 
     /**
-     * 添加Headers 并执行Get请求
+     * start request
      *
-     * @param headers 请求头
-     */
-    public void executeHttpGet(Map<String, String> headers) {
-        mType = HTTP_TYPE.GET;
-        if (mStringParams != null) {
-            if (!mUrl.contains("?")) {
-                mUrl = mUrl + "?" + mStringParams;
-            } else if (mUrl.substring(mUrl.length() - 1).equals("?")) {
-                mUrl = mUrl + mStringParams;
-            }
-        }
-        httpAccess(headers);
-    }
-
-    /**
-     * 添加Headers 并执行Post请求
-     *
-     * @param headers 请求头
-     */
-    public void executeHttpPost(Map<String, String> headers) {
-        mType = HTTP_TYPE.POST;
-        httpAccess(headers);
-    }
-
-    /**
-     * 开始异步网络请求
-     *
-     * @param headers 请求头
+     * @param headers
      */
     private void httpAccess(Map<String, String> headers) {
         try {

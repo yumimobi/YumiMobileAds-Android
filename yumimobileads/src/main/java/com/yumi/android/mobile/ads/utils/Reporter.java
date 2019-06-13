@@ -4,18 +4,17 @@ import android.content.Context;
 
 import com.yumi.android.mobile.ads.constants.Constants;
 import com.yumi.android.mobile.ads.utils.entity.ReportEntity;
-import com.yumi.android.mobile.ads.utils.report.ReportRequest;
+import com.yumi.android.mobile.ads.utils.module.report.ReportRequest;
 
 import java.util.List;
 
 
 /**
- * 自主上报处理类
+ * reporter handler
  */
 public class Reporter {
 
     public static final String TAG = "Reporter";
-
 
     public static void reportEvent(Context context, List<String> urls, ReportEntity entity) {
         if (urls != null) {

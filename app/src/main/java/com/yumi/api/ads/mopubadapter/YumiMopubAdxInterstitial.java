@@ -84,6 +84,7 @@ public class YumiMopubAdxInterstitial extends CustomEventInterstitial {
             public void onInterstitialExposure() {
                 ZplayDebug.i_m(TAG, "onInterstitialExposure", onoff);
                 if(interstitialListener != null) {
+                    interstitialListener.onInterstitialShown();
                     interstitialListener.onInterstitialImpression();
                 }
             }

@@ -8,7 +8,6 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.yumi.android.mobile.ads.beans.YumiResponseBean;
 import com.yumi.android.mobile.ads.constants.YumiMobileAPIList;
-import com.yumi.android.mobile.ads.publish.enumbean.BannerAdSize;
 import com.yumi.android.mobile.ads.publish.enumbean.AdType;
 import com.yumi.android.mobile.ads.request.YumiAdsRequest;
 import com.yumi.android.mobile.ads.utils.ZplayDebug;

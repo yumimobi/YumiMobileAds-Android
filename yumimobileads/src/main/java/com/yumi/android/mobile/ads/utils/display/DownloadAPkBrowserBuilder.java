@@ -33,7 +33,7 @@ import com.yumi.android.mobile.ads.utils.other.ThirdAppStarter;
 import com.yumi.android.mobile.ads.utils.ui.MyExplorer;
 
 /**
- * 新提的需求，打开浏览器，浏览器中有链接指向apk文件，点击该链接进行下载apk
+ * Browser
  *
  * @author glzlaohuai
  */
@@ -161,7 +161,7 @@ public class DownloadAPkBrowserBuilder {
 
         explorer.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int newProgress) {
-                // ZplayDebug.v(TAG, "进度:"+newProgress);
+                // ZplayDebug.v(TAG, "progress:"+newProgress);
                 if (newProgress < 100) {
                     progress_cont.setVisibility(View.VISIBLE);
                 } else {
@@ -177,16 +177,16 @@ public class DownloadAPkBrowserBuilder {
         explorer.setDownloadListener(new DownloadListener() {
             public void onDownloadStart(final String url, String userAgent, String contentDisposition, String mimetype,
                                         long contentLength) {
-                ZplayDebug.v_m(TAG, "点击了一个下载链接：" + url, onoff);
+                ZplayDebug.v_m(TAG, "click download url：" + url, onoff);
                 String extension = FileHandler.getFileExtensionName(url);
-                ZplayDebug.v_m(TAG, "链接指向的文件后缀为：" + extension, onoff);
+                ZplayDebug.v_m(TAG, "The file suffix pointed to by the link is：" + extension, onoff);
                 if (extension.trim().toLowerCase().equals("apk")) {
-                            ZplayDebug.v_m(TAG, "指向一个apk文件，开始进行下载...", onoff);
+                            ZplayDebug.v_m(TAG, "is apk file，start download...", onoff);
                             responseBid.setTarget_url(url);
                             DownloadHandler.startDownload(activity, responseBid, false);
                             dialog.dismiss();
                 } else {
-                    ZplayDebug.v_m(TAG, "非指向一个apk文件，不进行任何处理...", onoff);
+                    ZplayDebug.v_m(TAG, "not is apk file，not work...", onoff);
                 }
             }
         });

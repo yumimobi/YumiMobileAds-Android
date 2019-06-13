@@ -72,14 +72,14 @@ public class YumiInterstitialAd extends Control {
     public void requestInterstitial() {
 
         if (status == InterstitialStatus.PREPARED) {
-            ZplayDebug.v_m(TAG, "插屏已准备完成", onoff);
+            ZplayDebug.v_m(TAG, "interstitial is ready", onoff);
             if (listener != null) {
                 listener.onInterstitialPrepared();
             }
             return;
         }
         if (status == InterstitialStatus.REQUESTING) {
-            ZplayDebug.v_m(TAG, "插屏正在准备", onoff);
+            ZplayDebug.v_m(TAG, "interstitial is readying", onoff);
             if (listener != null) {
                 AdError adError = new AdError(ErrorCode.ERROR_INTERNAL);
                 adError.setErrorMessage("request interstitial failed, interstitial is loding");
@@ -139,7 +139,7 @@ public class YumiInterstitialAd extends Control {
                 interstitialDialog.setOnDismissListener(newDismissListener());
                 interstitialDialog.setOnShowListener(newShowListener());
 
-                ZplayDebug.w_m(TAG, "提前预加载插屏", onoff);
+                ZplayDebug.w_m(TAG, "Preload in advance", onoff);
                 wv.setTag(response);
 
                 String html = YumiTemplate.getYumiInterstitialTemplate(activity, response.getFirstAd());
@@ -194,7 +194,7 @@ public class YumiInterstitialAd extends Control {
         return new OnDismissListener() {
             public void onDismiss(DialogInterface dialog1) {
                 status = InterstitialStatus.NO_ACTION;
-                ZplayDebug.v_m(TAG, "插屏关闭", onoff);
+                ZplayDebug.v_m(TAG, "Interstitial closeed", onoff);
                 try {
                     if (interstitialDialogView != null) {
                         interstitialDialogView.removeAllViews();
@@ -211,32 +211,32 @@ public class YumiInterstitialAd extends Control {
     }
 
     /**
-     * 构建广告视图
+     * create interstitial ad view
      */
     @SuppressLint("RtlHardcoded")
     @SuppressWarnings("deprecation")
     private void createView(YumiAdBean responseAd) {
         try {
-            // 创建插屏容器
+            // create interstitial container
             interstitialDialogView = new FrameLayout(activity);
             interstitialDialogView.setLayoutParams(
                     new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             interstitialDialogView.setBackgroundColor(0x88000000);
-            // 创建插屏包裹
+            // create interstitial house
             FrameLayout interstitialDialogHouse = new FrameLayout(activity);
             FrameLayout.LayoutParams house_param = new FrameLayout.LayoutParams(
                     LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             house_param.gravity = Gravity.CENTER;
             interstitialDialogView.addView(interstitialDialogHouse, house_param);
 
-            // 添加广告WebView
+            // create WebView
             int width = WindowSizeUtils.dip2px(activity, responseAd.getW());
             int height = WindowSizeUtils.dip2px(activity, responseAd.getH());
             int[] displayMetrics = PhoneInfoGetter.getDisplayMetrics(activity);
             ADSize intersititialSize = getBenefitSize(width, height,
                     (int) (displayMetrics[0] * 0.8f),
                     (int) (displayMetrics[1] * 0.8f));
-            ZplayDebug.v_m(TAG, "广告尺寸==" + intersititialSize.getWidth() + ":"
+            ZplayDebug.v_m(TAG, "interstitial size==" + intersititialSize.getWidth() + ":"
                     + intersititialSize.getHeight(), onoff);
             interstitialDialogHouse.getLayoutParams().width = intersititialSize.getWidth();
             interstitialDialogHouse.getLayoutParams().height = intersititialSize.getHeight();
@@ -271,7 +271,7 @@ public class YumiInterstitialAd extends Control {
             interstitialDialogHouse.addView(closeBtn);
             interstitialDialogHouse.addView(closeBtnFucker);
 
-            // 设定按钮点击事件
+            // set close button click
             closeBtnFucker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -291,7 +291,7 @@ public class YumiInterstitialAd extends Control {
             return new ADSize(width, height);
         } else {
             float scale = width * 1.0f / height;
-            // 将图片的高变成与屏幕高度相同
+            // Change the height of the picture to the same height as the screen
             int scaledWidth = (int) (scale * maxHeight);
             if (scaledWidth > maxWidth) {
                 int scaleHeight = (int) (maxWidth / scale);
@@ -346,7 +346,7 @@ public class YumiInterstitialAd extends Control {
         public void onPageFinished(final WebView view, final String url) {
 
             int progress = view.getProgress();
-            ZplayDebug.v_m(TAG, "插屏进度=" + progress + "%", onoff);
+            ZplayDebug.v_m(TAG, "interstitial progress=" + progress + "%", onoff);
             if (progress >= 100 && !isHtmlLoadFinish) {
                 isHtmlLoadFinish = true;
                 onInterstitialPrepare();
@@ -354,7 +354,7 @@ public class YumiInterstitialAd extends Control {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        ZplayDebug.v_m(TAG, "过1秒后再次检测进度", onoff);
+                        ZplayDebug.v_m(TAG, "Check the progress again after 1 second", onoff);
                         onPageFinished(view, url);
                     }
                 }, 1000);

@@ -13,13 +13,11 @@ public class ReportEntity implements Serializable {
     private List<String> displayTrackerUrl;
     private List<String> clickTrackerUrl;
     /**
-     * 记录视频当前播放进度，中断视频播放上报时，使用此值，如播放视频期间点击 home 键返回系统桌面，导致视频暂停，设置此值
-     * 在落地页点击时，此值应为视频总长度
+     * video play postition
      */
     private int videoPosition;
-    //以下变量为1.3.0.2新增
     /**
-     * 点击区域
+     * click Area
      */
     private Map<String, String> clickArea;
 

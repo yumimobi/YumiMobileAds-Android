@@ -4,9 +4,6 @@ import android.content.Context;
 
 import com.yumi.android.mobile.ads.utils.ZplayDebug;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 

@@ -18,7 +18,7 @@ public class FileHandler {
     }
 
     /**
-     * sd卡是否可用
+     * isSDAvaliable
      *
      * @return
      */
@@ -27,7 +27,7 @@ public class FileHandler {
     }
 
     /**
-     * 获取sd卡的根目录
+     * get SDRootDIR
      *
      * @return
      */
@@ -47,63 +47,6 @@ public class FileHandler {
         return cachePath;
     }
 
-    /**
-     * 递归删除文件和文件夹
-     *
-     * @param file
-     */
-    public static void RecursionDeleteFile(final File file) {
-        try {
-            if (file.isFile()) {
-                file.delete();
-                return;
-            }
-            if (file.isDirectory()) {
-                File[] childFile = file.listFiles();
-                if (childFile == null || childFile.length == 0) {
-                    file.delete();
-                    return;
-                }
-                for (File f : childFile) {
-                    RecursionDeleteFile(f);
-                }
-                file.delete();
-            }
-        } catch (Exception e) {
-            Log.e("YumiMobi", "RecursionDeleteFile error", e);
-        }
-    }
-
-
-    /**
-     * 删除文件夹下所有文件
-     *
-     * @param filePath      文件夹地址
-     * @param exceptionPath 不想要被删除的文件地址
-     */
-    public static boolean DeleteFileInDirectory(final String filePath, final String exceptionPath) {
-        try {
-            File file_dir = new File(filePath);
-            if (file_dir.isDirectory()) {
-                File[] childFile = file_dir.listFiles();
-                if (childFile != null || childFile.length > 0) {
-                    for (File file : childFile) {
-                        if (exceptionPath == null || "".equals(exceptionPath)) {
-                            file.delete();
-                        } else if (!file.getPath().equals(exceptionPath)) {
-                            file.delete();
-                        }
-                    }
-                }
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            Log.e("YumiMobi", "DeleteFileInDirectory error", e);
-        }
-        return false;
-    }
 
     public static File getDownloadFile(DownloadManager dm, long downloadId) {
         File result = null;

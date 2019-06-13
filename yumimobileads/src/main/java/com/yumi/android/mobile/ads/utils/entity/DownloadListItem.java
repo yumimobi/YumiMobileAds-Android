@@ -11,7 +11,7 @@ public class DownloadListItem {
     private String path;
     private int status;
     /**
-     * 下载完成
+     * download success
      */
     private List<String> downloadedTrackerUrl;
 

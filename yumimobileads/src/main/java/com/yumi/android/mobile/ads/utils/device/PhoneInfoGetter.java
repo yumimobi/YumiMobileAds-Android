@@ -29,7 +29,7 @@ public final class PhoneInfoGetter {
     private static String ua;
 
     /**
-     * 获取手机品牌
+     * Brand
      *
      * @return
      */
@@ -38,14 +38,14 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取手机的型号
+     * Model
      */
     public static String getModel() {
         return android.os.Build.MODEL;
     }
 
     /**
-     * 获取android版本号int
+     * Android version code
      *
      * @return
      */
@@ -54,7 +54,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取手机的生产厂商
+     * Manufacturer
      *
      * @return
      */
@@ -63,7 +63,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取系统版本号
+     * SysVersion
      *
      * @return
      */
@@ -71,17 +71,9 @@ public final class PhoneInfoGetter {
         return android.os.Build.VERSION.RELEASE;
     }
 
-    /**
-     * 获取android版本号int
-     *
-     * @return
-     */
-    public static int getAndroidSDK() {
-        return android.os.Build.VERSION.SDK_INT;
-    }
 
     /**
-     * 获取imei信息 为空时 返回androidID
+     * if imei is null，get androidId
      *
      * @param context
      * @return
@@ -105,7 +97,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取 imei
+     * IMEI
      *
      * @param context
      * @return
@@ -126,7 +118,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取imsi信息
+     * IMSI
      *
      * @param context
      * @return
@@ -150,7 +142,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取iccid
+     * iccid
      *
      * @param context
      * @return
@@ -174,7 +166,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取设备屏幕分辩密度
+     * DisplayDensity
      *
      * @param context
      * @return
@@ -186,7 +178,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取设备屏幕分辨率密度dpi
+     * DisplayDensityDpi
      *
      * @param context
      * @return
@@ -198,7 +190,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取手机屏幕分辨率
+     * DisplayMetrics
      *
      * @param context
      * @return
@@ -209,7 +201,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取语言设置
+     * Language
      *
      * @return
      */
@@ -217,32 +209,9 @@ public final class PhoneInfoGetter {
         return Locale.getDefault().toString();
     }
 
-    /**
-     * 获取国家设置
-     *
-     * @param context
-     * @return
-     */
-    public static String getCountry(Context context) {
-        try {
-            TelephonyManager telephonyManager = (TelephonyManager) context
-                    .getSystemService(Context.TELEPHONY_SERVICE);
-            if (telephonyManager == null) {
-                return "";
-            }
-            String zone = telephonyManager.getSimCountryIso();
-            if (zone == null) {
-                zone = "";
-            }
-            return zone;
-        } catch (Exception ex) {
-
-        }
-        return "";
-    }
 
     /**
-     * 获取mac地址
+     * MAC
      *
      * @param context
      * @return
@@ -269,7 +238,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取手机PLMN
+     * PLMN
      *
      * @param context
      * @return
@@ -296,42 +265,8 @@ public final class PhoneInfoGetter {
         return "";
     }
 
-    public static String getMNC(Context context) {
-        String plmn = getPLMN(context);
-        if (plmn.length() >= 5) {
-            return plmn.substring(3);
-        }
-        return "";
-    }
-
-    public static String getMCC(Context context) {
-        String plmn = getPLMN(context);
-        if (plmn.length() >= 5) {
-            return plmn.substring(0, 3);
-        }
-        return "";
-    }
-
-    public static String getISOCountryCode(Context context) {
-        try {
-            TelephonyManager tm = (TelephonyManager) context
-                    .getSystemService(Context.TELEPHONY_SERVICE);
-            if (tm == null) {
-                return "";
-            }
-            String icc = null;
-            if (tm != null) {
-                icc = tm.getSimCountryIso();
-            }
-            return icc == null ? "" : icc;
-        } catch (Exception ex) {
-
-        }
-        return "";
-    }
-
     /**
-     * 获取手机webview的userAgent
+     * UserAgent
      *
      * @return
      */
@@ -355,7 +290,7 @@ public final class PhoneInfoGetter {
 
 
     /**
-     * 获取androidID
+     * AndroidID
      *
      * @param context
      * @return
@@ -377,7 +312,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取设备类型
+     * DeviceType
      *
      * @param context
      * @return 0:phone 1:pad
@@ -394,7 +329,7 @@ public final class PhoneInfoGetter {
     }
 
     /**
-     * 获取横竖屏的标示，约定1：竖屏 0：横屏
+     * ScreenMode，1：PORTRAIT 0：LANDSCAPE
      *
      * @param context
      * @return
@@ -406,51 +341,34 @@ public final class PhoneInfoGetter {
             return 1;
         }
     }
-
+    /**
+     * Activity is Full Screen
+     *
+     * @return
+     */
     public static boolean isFullScreen(Activity activity) {
         return ((activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) != 0);
     }
 
     /**
-     * 获取位置
+     * OperatorType 46000 46002 46004 46007 CMCC 46001 46006 46009 CUCC 46003 46005 46011
+     * CTCC
+     * OperatorType
      *
-     * @param ctx
-     * @return
-     */
-    public static PhoneInfoGetter.Location getLocation(Context ctx) {
-
-        PhoneInfoGetter.Location loc = new PhoneInfoGetter.Location();
-        loc.lat = "0.0";
-        loc.lng = "0.0";
-        loc.time = "0";
-        return loc;
-    }
-
-    public static class Location {
-        public String lng;
-        public String lat;
-        public String time;
-    }
-
-    /**
-     * 获取运营商 46000 46002 46004 46007 代表中国移动 46001 46006 46009代表中国联通 46003 46005 46011
-     * 代表中国电信 46020 代表中国铁通
-     * 获取设备运营商
-     *
-     * @return ["中国电信CTCC":"1"]["中国联通CUCC:"3"]["中国移动CMCC":"0"]["other":"4"]
+     * @return ["CTCC":"1"]["CUCC:"3"]["CMCC":"0"]["other":"4"]
      */
     public static int getOperatorType(Context context) {
         try {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String operator = tm.getNetworkOperator();
             int opeType = 4;
-            // 中国联通
+            // CUCC
             if ("46001".equals(operator) || "46006".equals(operator) || "46009".equals(operator)) {
                 opeType = 3;
-                // 中国移动
+                // CMCC
             } else if ("46000".equals(operator) || "46002".equals(operator) || "46004".equals(operator) || "46007".equals(operator)) {
                 opeType = 0;
-                // 中国电信
+                // CTCC
             } else if ("46003".equals(operator) || "46005".equals(operator) || "46011".equals(operator)) {
                 opeType = 1;
             }

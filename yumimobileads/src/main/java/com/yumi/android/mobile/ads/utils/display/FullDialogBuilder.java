@@ -8,7 +8,7 @@ import com.yumi.android.mobile.ads.utils.device.PhoneInfoGetter;
 public class FullDialogBuilder {
 
     /**
-     * 根据当前应用的theme设置来构造全屏或者全屏但是带系统状态栏的对话框
+     * create Dialog
      *
      * @param activity
      * @return

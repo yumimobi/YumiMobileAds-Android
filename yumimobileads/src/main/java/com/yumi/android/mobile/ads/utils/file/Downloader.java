@@ -108,21 +108,20 @@ public class Downloader {
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance("X509");
                 kmf.init(trustStore, "password".toCharArray());
                 HttpsURLConnection conn = (HttpsURLConnection) u.openConnection();
-                // 设置忽略证书
+                // set no SSL
                 conn.setHostnameVerifier(new HostnameVerifier() {
                     @Override
                     public boolean verify(String hostname, SSLSession session) {
                         return true;
                     }
                 });
-                // 设置SSLContext
+                // set SSLContext
                 SSLContext sslcontext = SSLContext.getInstance("SSL", "AndroidOpenSSL");
                 sslcontext.init(kmf.getKeyManagers(), new TrustManager[]
                         {
                                 myX509TrustManager
                         }, new java.security.SecureRandom());
 
-                // 设置套接工厂
                 conn.setSSLSocketFactory(sslcontext.getSocketFactory());
                 conn.setDoInput(true);
                 conn.setConnectTimeout(1000);

@@ -28,7 +28,7 @@ public class RequestParamsBuilder {
     private static final boolean onoff = true;
 
     /**
-     * 构建Geo对象请求参数
+     * bulid Geo param
      */
     private static JSONObject buildGeoParam(final Activity activity) {
         JSONObject geoJson = new JSONObject();
@@ -42,7 +42,7 @@ public class RequestParamsBuilder {
     }
 
     /**
-     * 构建App对象请求参数
+     * bulid App param
      */
     public static JSONObject buildAppParam(final Activity activity, final String id) {
         JSONObject appjson = new JSONObject();
@@ -61,7 +61,7 @@ public class RequestParamsBuilder {
     }
 
     /**
-     * 构建Device对象请求参数
+     * bulid Device param
      */
     public static JSONObject buildDeviceParam(final Activity activity) {
         JSONObject dvjson = new JSONObject();
@@ -95,7 +95,7 @@ public class RequestParamsBuilder {
     }
 
     /**
-     * 构建screen对象请求参数
+     * bulid screen param
      */
     private static JSONObject buildScreenParam(final Activity activity) {
         JSONObject screenJson = new JSONObject();
@@ -112,7 +112,7 @@ public class RequestParamsBuilder {
     }
 
     /**
-     * 构建screen对象请求参数
+     * bulid ads param
      */
     public static JSONArray buildAdsParam(final Activity activity, AdType adType, String placementID, ADSize adSize) {
         JSONArray ads = new JSONArray();
@@ -160,7 +160,7 @@ public class RequestParamsBuilder {
 
 
     /**
-     * 构建User对象请求参数
+     * bulid user param
      */
     public static JSONObject buildUserParam() {
         JSONObject userJson = new JSONObject();
@@ -173,7 +173,7 @@ public class RequestParamsBuilder {
     }
 
     /**
-     * 构建UserExt对象请求参数
+     * bulid user ext param
      */
     private static JSONObject buildUserExtParam() {
         JSONObject userExtJson = new JSONObject();
@@ -186,7 +186,7 @@ public class RequestParamsBuilder {
     }
 
     /**
-     * 构建Regs对象请求参数
+     * bulid regs param
      */
     public static JSONObject buildRegsParam() {
         JSONObject userJson = new JSONObject();
@@ -201,7 +201,7 @@ public class RequestParamsBuilder {
     }
 
     /**
-     * 构建RegsExt对象请求参数
+     * bulid regs ext param
      */
     private static JSONObject buildRegsExtParam() {
         JSONObject userExtJson = new JSONObject();

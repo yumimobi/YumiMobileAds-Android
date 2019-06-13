@@ -3,7 +3,6 @@ package com.yumi.android.mobile.ads.utils.template;
 import android.content.Context;
 
 import com.yumi.android.mobile.ads.beans.YumiAdBean;
-import com.yumi.android.mobile.ads.beans.YumiResponseBean;
 import com.yumi.android.mobile.ads.constants.Constants;
 import com.yumi.android.mobile.ads.utils.assets.YumiAssetsReader;
 

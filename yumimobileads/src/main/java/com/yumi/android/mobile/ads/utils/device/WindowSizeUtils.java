@@ -27,11 +27,10 @@ public final class WindowSizeUtils {
 
 
     /***
-     * 获取屏幕宽高 px
+     * RealSize px
      */
     @SuppressWarnings("deprecation")
     public static int[] getRealSize(Activity activity) {
-        //TODO 增加系统版本判断
         if (Build.VERSION.SDK_INT >= 17) {
             Point point = new Point();
             activity.getWindowManager().getDefaultDisplay().getRealSize(point);
@@ -91,11 +90,4 @@ public final class WindowSizeUtils {
         return new int[]{0, 0};
     }
 
-    /**
-     * 获取屏幕宽度，单位为 px
-     */
-    public static int getAndroidScreenWidth(Context context) {
-        int widthDp = getAndroidScreenProperty(context)[0];
-        return dip2px(context, widthDp);
-    }
 }

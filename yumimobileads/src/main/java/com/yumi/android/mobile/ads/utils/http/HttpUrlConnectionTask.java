@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -38,8 +36,8 @@ public class HttpUrlConnectionTask extends AsyncTask<String, Void, Map<String, O
             return true;
         }
     };
-    private final int CONNECTION_TIMEOUT = 1000; //建立连接超时时间/毫秒
-    private final int READ_TIMEOUT = 4000; //数据传输超时时间/毫秒
+    private final int CONNECTION_TIMEOUT = 1000;
+    private final int READ_TIMEOUT = 4000;
     private IHttpCallback mIHttpCallback = null;
     private HTTP_TYPE mType = HTTP_TYPE.GET;
     private PROTOCOL_TYPE mProtocolType = PROTOCOL_TYPE.HTTP;
@@ -66,21 +64,6 @@ public class HttpUrlConnectionTask extends AsyncTask<String, Void, Map<String, O
         mContext = context;
     }
 
-    ;
-
-    /**
-     * 信任所有主机-对于任何证书都不做检查
-     */
-    private static void trustAllHosts() {
-        // Install the all-trusting trust manager
-        try {
-            SSLContext sc = SSLContext.getInstance("SSL", "AndroidOpenSSL");
-            sc.init(null, xtmArray, new java.security.SecureRandom());
-            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void onPreExecute() {
@@ -93,8 +76,8 @@ public class HttpUrlConnectionTask extends AsyncTask<String, Void, Map<String, O
         if (!NetworkStatusHandler.isNetWorkAvaliable(mContext)) {
             result.put("status", -1);
             result.put("data", "");
-            result.put("msg", "没有网络连接");
-            ZplayDebug.v_m(TAG, "没有网络连接", onoff);
+            result.put("msg", "NetWork Error");
+            ZplayDebug.v_m(TAG, "NetWork Error", onoff);
             return result;
         }
         if (urls == null || urls.length == 0) {
@@ -110,10 +93,10 @@ public class HttpUrlConnectionTask extends AsyncTask<String, Void, Map<String, O
             URL httpUrl = new URL(urls[0]);
             httpUrlCon = (HttpURLConnection) httpUrl.openConnection();
             // set  http  configure
-            httpUrlCon.setConnectTimeout(CONNECTION_TIMEOUT);// 建立连接超时时间
-            httpUrlCon.setReadTimeout(READ_TIMEOUT);//数据传输超时时间，很重要，必须设置。
-            httpUrlCon.setDoInput(true); // 向连接中写入数据
-            httpUrlCon.setUseCaches(false); // 禁止缓存
+            httpUrlCon.setConnectTimeout(CONNECTION_TIMEOUT);
+            httpUrlCon.setReadTimeout(READ_TIMEOUT);
+            httpUrlCon.setDoInput(true);
+            httpUrlCon.setUseCaches(false);
             httpUrlCon.setInstanceFollowRedirects(true);
             httpUrlCon.setRequestProperty("Charset", "UTF-8");
             if (mHeaders == null) {
@@ -132,16 +115,16 @@ public class HttpUrlConnectionTask extends AsyncTask<String, Void, Map<String, O
 
             switch (mType) {
                 case GET:
-                    httpUrlCon.setDoOutput(false); // 从连接中读取数据
-                    httpUrlCon.setRequestMethod("GET");// 设置请求类型为
+                    httpUrlCon.setDoOutput(false);
+                    httpUrlCon.setRequestMethod("GET");
                     break;
                 case POST:
-                    httpUrlCon.setDoOutput(true); // 从连接中读取数据
-                    httpUrlCon.setRequestMethod("POST");// 设置请求类型为
-                    DataOutputStream out = new DataOutputStream(httpUrlCon.getOutputStream()); // 获取输出流
-                    out.write(mParams.getBytes("utf-8"));// 将要传递的数据写入数据输出流,不要使用out.writeBytes(param); 否则中文时会出错
-                    out.flush(); // 输出缓存
-                    out.close(); // 关闭数据输出流
+                    httpUrlCon.setDoOutput(true);
+                    httpUrlCon.setRequestMethod("POST");
+                    DataOutputStream out = new DataOutputStream(httpUrlCon.getOutputStream());
+                    out.write(mParams.getBytes("utf-8"));
+                    out.flush();
+                    out.close();
                     break;
                 default:
                     break;
@@ -151,13 +134,13 @@ public class HttpUrlConnectionTask extends AsyncTask<String, Void, Map<String, O
             //check the result of connection
             ZplayDebug.i_m(TAG, "httpUrlCon.getResponseCode() : " + httpUrlCon.getResponseCode(), onoff);
             if (httpUrlCon.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                InputStreamReader in = new InputStreamReader(httpUrlCon.getInputStream()); // 获得读取的内容
-                BufferedReader buffer = new BufferedReader(in); // 获取输入流对象
+                InputStreamReader in = new InputStreamReader(httpUrlCon.getInputStream());
+                BufferedReader buffer = new BufferedReader(in);
                 String inputLine;
                 while ((inputLine = buffer.readLine()) != null) {
                     data.append(inputLine).append("\n");
                 }
-                in.close(); // 关闭字符输入流
+                in.close();
             }
 
             result.put("status", httpUrlCon.getResponseCode());
@@ -166,7 +149,6 @@ public class HttpUrlConnectionTask extends AsyncTask<String, Void, Map<String, O
 //            ZplayDebug.d(TAG, "result_str: " + result,onoff);
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "doInBackground error: ", e, onoff);
-            //如果需要处理超时，可以在这里写
         } finally {
             if (httpUrlCon != null) {
                 httpUrlCon.disconnect(); // 断开连接

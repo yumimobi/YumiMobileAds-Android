@@ -1,4 +1,4 @@
-package com.yumi.android.mobile.ads.utils.report;
+package com.yumi.android.mobile.ads.utils.module.report;
 
 import android.content.Context;
 import android.net.Uri;
@@ -35,26 +35,17 @@ public class ReportRequest {
     private static Executor mExecutor = Executors.newFixedThreadPool(4);
 
     /**
-     * 上报
+     * report
      *
      * @return
      */
     public static void startEventReport(final Context context, final String[] urls, ReportEntity entity) {
         try {
-//            if (urls == null && entity != null) {
-//                int adMode = entity.getAdMode();
-//                if (ADResponse.AD_MODE_MA == adMode) {
-//                    reportMA(context, entity);
-//                } else {
-//                    reportBI(context, entity);
-//                }
-//            } else {
             Map<String, String> clickArea = null;
             if (entity != null) {
                 clickArea = entity.getClickArea();
             }
             report(urls, clickArea);
-//            }
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "startEventReport error:", e, onoff);
         }
@@ -62,7 +53,7 @@ public class ReportRequest {
 
 
     /***
-     * 第三方上报，替换宏变量
+     * change macro
      * @param urls
      * @param clickArea
      */
@@ -80,7 +71,7 @@ public class ReportRequest {
                             .replace(Constants.macro.CLICK_DOWN_Y, "-999").replace(Constants.macro.CLICK_UP_X, "-999")
                             .replace(Constants.macro.CLICK_UP_Y, "-999");
                 }
-                ZplayDebug.v_m(TAG, "上报:" + reportUrl, onoff);
+                ZplayDebug.v_m(TAG, "report:" + reportUrl, onoff);
                 requestThird(reportUrl);
             } catch (Exception e) {
                 ZplayDebug.e_m(TAG, "report error url:" + url + "  ", e, onoff);
@@ -88,25 +79,20 @@ public class ReportRequest {
         }
     }
 
-    // ADSERVICE_CLICK_DOWN_X 点击落下X坐标，客户端将改字符串替换为真实值即可
-    // ADSERVICE_CLICK_DOWN_Y 点击落下Y坐标，客户端将改字符串替换为真实值即可
-    // ADSERVICE_CLICK_UP_X 点击离开X坐标，客户端将改字符串替换为真实值即可
-    // ADSERVICE_CLICK_UP_Y 点击离开Y坐标，客户端将改字符串替换为真实值即可
-
     /**
-     * 上报第三方
+     * report third
      *
      * @param thirdurl
      */
     private static void requestThird(final String thirdurl) {
-        ZplayDebug.v_m(TAG, "准备上报第三方", onoff);
+        ZplayDebug.v_m(TAG, "start report third", onoff);
         mExecutor.execute(new Runnable() {
             //            @SuppressLint("TrulyRandom")
             @Override
             public void run() {
                 int flag = 0;
                 try {
-                    ZplayDebug.i_m(TAG, "flag=" + flag + " 第三方监播地址:" + thirdurl, onoff);
+                    ZplayDebug.i_m(TAG, "flag=" + flag + " thirdurl:" + thirdurl, onoff);
                     URL url = new URL(thirdurl);
                     Uri uri = Uri.parse(thirdurl);
                     String scheme = uri.getScheme();
@@ -134,21 +120,18 @@ public class ReportRequest {
                         KeyManagerFactory kmf = KeyManagerFactory.getInstance("X509");
                         kmf.init(trustStore, "password".toCharArray());
                         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-                        // 设置忽略证书
                         conn.setHostnameVerifier(new HostnameVerifier() {
                             @Override
                             public boolean verify(String hostname, SSLSession session) {
                                 return true;
                             }
                         });
-                        // 设置SSLContext
                         SSLContext sslcontext = SSLContext.getInstance("SSL", "AndroidOpenSSL");
                         sslcontext.init(kmf.getKeyManagers(), new TrustManager[]
                                 {
                                         myX509TrustManager
                                 }, new java.security.SecureRandom());
 
-                        // 设置套接工厂
                         conn.setSSLSocketFactory(sslcontext.getSocketFactory());
 
                         conn.setInstanceFollowRedirects(true);
@@ -170,7 +153,6 @@ public class ReportRequest {
                 }
             }
         });
-//        new Thread(run).start();
     }
 
     public interface Callback {

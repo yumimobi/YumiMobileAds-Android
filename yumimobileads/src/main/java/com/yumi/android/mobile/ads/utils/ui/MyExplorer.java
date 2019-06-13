@@ -42,7 +42,7 @@ public class MyExplorer extends RelativeLayout {
     private Activity context;
     private WebViewClient mClient;
     private OnClickListener btnClickListener;
-    //    private WebStatus mStatus;
+
     private String html;
     private Handler handler;
     private OnHandleClose mOnHandleClose;
@@ -73,11 +73,9 @@ public class MyExplorer extends RelativeLayout {
         setBottom();
         setWebView();
         checkBtnStatus();
-//        setLoadingAnim();TODO 不要动画了
 
         checkCloseStatus(false);
 
-        // 两秒后激活关闭按钮
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -86,9 +84,6 @@ public class MyExplorer extends RelativeLayout {
         }, 2000);
     }
 
-    /**
-     * 添加主页面
-     */
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebView() {
         wv = buildWebView(context);
@@ -102,17 +97,13 @@ public class MyExplorer extends RelativeLayout {
         this.addView(wv);
     }
 
-    /**
-     * 添加底部栏
-     */
     private void setBottom() {
-        // 后退按钮
         btn_web_back = getBelowBtn(ResFactory.getStateListDrawable("zplayadx_btn_web_goback", context));
-        // 前进按钮
+
         btn_web_forward = getBelowBtn(ResFactory.getStateListDrawable("zplayadx_btn_web_goforward", context));
-        // 刷新按钮
+
         btn_web_reflush = getBelowBtn(ResFactory.getStateListDrawable("zplayadx_btn_web_reflush", context));
-        // 关闭按钮
+
         btn_close = getBelowBtn(ResFactory.getStateListDrawable("zplayadx_btn_web_close", context));
 
         btn_web_back.setOnClickListener(btnClickListener);
@@ -120,7 +111,6 @@ public class MyExplorer extends RelativeLayout {
         btn_web_reflush.setOnClickListener(btnClickListener);
         btn_close.setOnClickListener(btnClickListener);
 
-        // 底部容器
         LinearLayout ll = new LinearLayout(context);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 dip2px(context, 50));
@@ -152,10 +142,6 @@ public class MyExplorer extends RelativeLayout {
         return btn;
     }
 
-
-    /**
-     * 根据页面状态设置前进、后退按钮状态
-     */
     private void checkBtnStatus() {
         if (wv.canGoBack()) {
             btn_web_back.setImageDrawable(ResFactory.getStateListDrawable("zplayadx_btn_web_goback", context));
@@ -170,20 +156,17 @@ public class MyExplorer extends RelativeLayout {
 
     }
 
-    /**
-     * 根据页面状态设置关闭按钮状态
-     */
     private void checkCloseStatus(boolean isCanClose) {
 
         if (!isCanClose) {
             btn_close.setEnabled(false);
             btn_close.setImageDrawable(ResFactory.getDrawableByAssets("zplayadx_btn_web_close_lass", context));
-            ZplayDebug.v_m(TAG, "关闭按钮失效", onoff);
+            ZplayDebug.v_m(TAG, "can't close", onoff);
         } else {
             btn_close.setEnabled(true);
             btn_close.setOnClickListener(btnClickListener);
             btn_close.setImageDrawable(ResFactory.getStateListDrawable("zplayadx_btn_web_close", context));
-            ZplayDebug.v_m(TAG, "关闭按钮激活", onoff);
+            ZplayDebug.v_m(TAG, "can close", onoff);
         }
 
     }
@@ -268,8 +251,6 @@ public class MyExplorer extends RelativeLayout {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-//                mStatus = WebStatus.LOADING;
-//                startLoadingAnim();TODO 不要动画了
                 if (client != null) {
                     client.onPageStarted(view, url, favicon);
                 }
@@ -278,9 +259,6 @@ public class MyExplorer extends RelativeLayout {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                // 加载完成后激活关闭按钮
-//                mStatus = WebStatus.FINISH;
-//                stopLoadingAnim();TODO 不要动画了
                 if (client != null) {
                     client.onPageFinished(view, url);
                 }
@@ -290,8 +268,6 @@ public class MyExplorer extends RelativeLayout {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-                // 加载错误时激活关闭按钮
-//                mStatus = WebStatus.FINISH;
                 if (client != null) {
                     client.onReceivedError(view, errorCode, description, failingUrl);
                 }
@@ -402,7 +378,7 @@ public class MyExplorer extends RelativeLayout {
     }
 
     /**
-     * 创建webView
+     * build ebView
      *
      * @param context activity
      * @return
@@ -420,7 +396,7 @@ public class MyExplorer extends RelativeLayout {
             webView.setHorizontalScrollbarOverlay(false);
             webView.setHorizontalScrollBarEnabled(false);
             webSettings.setDomStorageEnabled(true);//DOM Storage
-            //如果网页链接是https的但是内容里面比如图片是http的，android 4.4以后webview会阻塞链接的打开，需要做以下处理
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             }
@@ -438,11 +414,6 @@ public class MyExplorer extends RelativeLayout {
         this.mOnHandleClose = onHandleClose;
     }
 
-    //    private enum WebStatus
-//    {
-//        LOADING, FINISH;
-//    }
-//
     public void destroy() {
         if (wv != null) {
             wv.destroy();

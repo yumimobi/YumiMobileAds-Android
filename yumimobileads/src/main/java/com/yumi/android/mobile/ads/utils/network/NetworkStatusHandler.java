@@ -3,22 +3,16 @@ package com.yumi.android.mobile.ads.utils.network;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
 import com.yumi.android.mobile.ads.utils.ZplayDebug;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public final class NetworkStatusHandler {
 
     private static final String TAG = "NetworkStatusHandler";
     private static final boolean onoff = true;
 
-    // 判断是否有可用的网络连接
     public static boolean isNetWorkAvaliable(Context context) {
         try {
             ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -43,7 +37,6 @@ public final class NetworkStatusHandler {
     }
 
     /**
-     * 获取设备联网方式
      *
      * @param context
      * @return 0:2G,1:3G,2:4G,3:WIFI

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ADDB extends SQLiteOpenHelper {
     private static final String TAG = "ADDB";
-    private static final String DB_NAME = "zplayadmobileadx"; //TODO 在数据库发生变化的情况下，不需要升级数据库了，直接修改一个新的库名
+    private static final String DB_NAME = "zplayadmobileadx";
     private static final int DB_VERSION = 1;
 
     private final static String SQL_CREATE_DOWNLOADLIST =

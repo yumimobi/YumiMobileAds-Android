@@ -154,9 +154,9 @@ public class YumiBannerAd extends Control {
 
             int progress = view.getProgress();
 
-            ZplayDebug.v_m(TAG, "Banner进度=" + progress + "%", onoff);
+            ZplayDebug.v_m(TAG, "Banner progress=" + progress + "%", onoff);
             if (progress >= 100 && !isFinish) {
-                ZplayDebug.v_m(TAG, "banner加载成功", onoff);
+                ZplayDebug.v_m(TAG, "banner load success", onoff);
                 bannerBox.addView(view);
                 if(bannerListener != null) {
                     bannerListener.onBannerPrepared(bannerBox);
@@ -167,7 +167,7 @@ public class YumiBannerAd extends Control {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        ZplayDebug.v_m(TAG, "过1秒后再次检测进度", onoff);
+                        ZplayDebug.v_m(TAG, "Check the progress again after 1 second", onoff);
                         if (url != null) {
                             MyWebViewClient.this.onPageFinished(view, url);
                         }
@@ -204,26 +204,23 @@ public class YumiBannerAd extends Control {
                 ZplayHandlerClickActionUtils.handleClickAction(responseAd, activity, view, AdType.TYPE_BANNER);
             }
             onBannerClick();
-            ZplayDebug.v_m(TAG, "banner点击", onoff);
+            ZplayDebug.v_m(TAG, "banner clicked", onoff);
             return true;
         }
     }
 
     /**
-     * 将banner尺寸控制在容器内
-     *
-     * @param img_width
-     * @param img_height
-     * @return
+     * Control the banner size in the container
      */
     private ADSize handleBannerSize(float img_width, float img_height) {
-        ZplayDebug.w_m(TAG, "处理前的banner尺寸为:" + img_width + ":" + img_height, onoff);
+        ZplayDebug.w_m(TAG, "The banner size before processing is:" + img_width + ":" + img_height, onoff);
         float c_width = banner_width;
         float c_height = banner_height;
 
         float f_w = 0;
         float f_h = 0;
-        // 超出的等比缩小
+
+        //excessive ratio reduction
         if (img_width > c_width) {
             float pro = c_width / img_width;
             f_h = img_height * pro;
@@ -235,11 +232,6 @@ public class YumiBannerAd extends Control {
             f_w = f_w * pro;
             f_h = c_height;
         }
-
-        /*
-         * if (img_height>c_height) { float pro = c_height/img_height; f_w =
-         * img_width*pro; f_h = c_height; }
-         */
 
         // 较小的等比放大
         if (f_w == 0 && f_h == 0) {
@@ -253,7 +245,7 @@ public class YumiBannerAd extends Control {
                 f_h = (int) (c_width / i_pro);
             }
         }
-        ZplayDebug.w_m(TAG, "处理后的banner尺寸为:" + f_w + ":" + f_h, onoff);
+        ZplayDebug.w_m(TAG, "The processed banner size is:" + f_w + ":" + f_h, onoff);
         return new ADSize((int) f_w, (int) f_h);
     }
 
