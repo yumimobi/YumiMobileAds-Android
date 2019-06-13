@@ -1,6 +1,6 @@
 package com.yumi.android.mobile.ads.publish;
 
-public class YumiSetting {
+public class YumiSettings {
 
     // Indicates the GDPR requirement of the user. If it's 1, the user's subject to the GDPR laws.
     // Default is 0.
@@ -13,7 +13,6 @@ public class YumiSetting {
     // Default is 1.
     private static int coppa = 1;
 
-
     public static int getGdpr() {
         return gdpr;
     }
@@ -23,7 +22,7 @@ public class YumiSetting {
      * @param gdpr If it's 1, the user's subject to the GDPR laws. Default is 0.
      */
     public static void setGdpr(int gdpr) {
-        YumiSetting.gdpr = gdpr;
+        YumiSettings.gdpr = gdpr;
     }
 
     public static boolean isConsent() {
@@ -35,7 +34,7 @@ public class YumiSetting {
      * @param consent In this case, the user has given consent to store and process personal information.Default is true.
      */
     public static void setConsent(boolean consent) {
-        YumiSetting.consent = consent;
+        YumiSettings.consent = consent;
     }
 
     public static int getCoppa() {
@@ -47,7 +46,8 @@ public class YumiSetting {
      * @param coppa If it's 1, the user's subject to the coppa laws.Default is 1.
      */
     public static void setCoppa(int coppa) {
-        YumiSetting.coppa = coppa;
+        YumiSettings.coppa = coppa;
     }
+
 
 }

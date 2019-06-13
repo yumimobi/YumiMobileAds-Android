@@ -6,7 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 
-import com.yumi.android.mobile.ads.publish.YumiSetting;
+import com.yumi.android.mobile.ads.publish.YumiSettings;
 import com.yumi.android.mobile.ads.publish.enumbean.AdType;
 import com.yumi.android.mobile.ads.utils.ZplayDebug;
 import com.yumi.android.mobile.ads.utils.device.PackageInfoGetter;
@@ -19,8 +19,6 @@ import com.yumi.android.mobile.ads.utils.network.NetworkStatusHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import static com.yumi.android.mobile.ads.utils.device.WindowSizeUtils.dip2px;
 
 public class RequestParamsBuilder {
 
@@ -178,7 +176,7 @@ public class RequestParamsBuilder {
     private static JSONObject buildUserExtParam() {
         JSONObject userExtJson = new JSONObject();
         try {
-            userExtJson.put("consent", YumiSetting.isConsent() ? "yes" : "no");
+            userExtJson.put("consent", YumiSettings.isConsent() ? "yes" : "no");
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "buildUserExtParam error：", e, onoff);
         }
@@ -192,7 +190,7 @@ public class RequestParamsBuilder {
         JSONObject userJson = new JSONObject();
         try {
 
-            userJson.put("coppa", YumiSetting.getCoppa());
+            userJson.put("coppa", YumiSettings.getCoppa());
             userJson.put("ext", buildRegsExtParam());
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "buildRegsParam error：", e, onoff);
@@ -206,7 +204,7 @@ public class RequestParamsBuilder {
     private static JSONObject buildRegsExtParam() {
         JSONObject userExtJson = new JSONObject();
         try {
-            userExtJson.put("gdpr", YumiSetting.getGdpr());
+            userExtJson.put("gdpr", YumiSettings.getGdpr());
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "buildRegsExtParam error：", e, onoff);
         }

@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import com.mopub.common.MoPub;
 import com.mopub.common.SdkConfiguration;
 import com.mopub.common.SdkInitializationListener;
+import com.yumi.api.ads.check.CheckSelfPermissionUtils;
 import com.yumi.api.ads.mopubdemo.MopubBannerActivity;
 import com.yumi.api.ads.mopubdemo.MopubInterstitialActivity;
 
@@ -31,11 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         interstitialAd.setOnClickListener(this);
 
         final SdkConfiguration.Builder configBuilder = new SdkConfiguration.Builder(MOPUB_UNIT_ID_BANNER);
+
         MoPub.initializeSdk(this, configBuilder.build(), new SdkInitializationListener() {
             @Override
             public void onInitializationFinished() {
             }
         });
+        //When the targetSdkVersion of your app is 23 or above, you can choose the following method to check permission and prompt for user authorization
+        CheckSelfPermissionUtils.CheckSelfPermission(this);
     }
 
     @Override
