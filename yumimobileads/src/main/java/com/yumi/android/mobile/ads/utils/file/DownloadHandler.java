@@ -154,6 +154,7 @@ public class DownloadHandler {
                         TAG,
                         "Start Download App：" + fileName + "，adID：" + response.getId() + "，App Name：" + fileName + "，Download id"
                                 + downloadID, onoff);
+                ZplayDebug.v_m(TAG, "Save download completed report url：" + response.getAppDownloadFinishTrackers(), onoff);
                 DownloadListItem item = new DownloadListItem(
                         String.valueOf(downloadID),
                         response.getId(),
