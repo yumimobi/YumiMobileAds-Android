@@ -2,30 +2,30 @@ package com.yumi.android.mobile.ads.beans;
 
 public class YumiZplayBean {
 
-    private String app_id;
-    private String position_sid;
-    private String app_secret;
-    private String trans_data;
-    private String deep_link_url;
+    private String appId;
+    private String positionSid;
+    private String appSecret;
+    private String transData;
+    private String deepLinkUrl;
 
-    public String getApp_id() {
-        return app_id;
+    public String getAppId() {
+        return appId;
     }
 
-    public String getPosition_sid() {
-        return position_sid;
+    public String getPositionSid() {
+        return positionSid;
     }
 
-    public String getApp_secret() {
-        return app_secret;
+    public String getAppSecret() {
+        return appSecret;
     }
 
-    public String getTrans_data() {
-        return trans_data;
+    public String getTransData() {
+        return transData;
     }
 
-    public String getDeep_link_url() {
-        return deep_link_url;
+    public String getDeepLinkUrl() {
+        return deepLinkUrl;
     }
 
 }

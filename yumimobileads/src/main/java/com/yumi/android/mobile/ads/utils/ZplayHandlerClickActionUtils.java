@@ -46,16 +46,16 @@ public class ZplayHandlerClickActionUtils {
                 break;
             case Constants.actiontype.ACTION_TYPE_OPEN_APP_STORE:
 
-                if (!TextUtils.isEmpty(responseAd.getStore_bundle()) && !TextUtils.isEmpty(responseAd.getApp_bundle())) {
-                    if (openAppMarket(activity, responseAd.getStore_bundle(), responseAd.getApp_bundle())) {
+                if (!TextUtils.isEmpty(responseAd.getStoreBundle()) && !TextUtils.isEmpty(responseAd.getAppBundle())) {
+                    if (openAppMarket(activity, responseAd.getStoreBundle(), responseAd.getAppBundle())) {
                         ZplayDebug.v_m(TAG, "already opened app store", onoff);
                         break;
                     }
                 }
-                ZplayDebug.v_m(TAG, String.format("open app store failed, appStorePackage: %s, package: %s, delivery to default operation.", responseAd.getStore_bundle(), responseAd.getApp_bundle()), onoff);
+                ZplayDebug.v_m(TAG, String.format("open app store failed, appStorePackage: %s, package: %s, delivery to default operation.", responseAd.getStoreBundle(), responseAd.getAppBundle()), onoff);
             default:
                 ZplayDebug.v_m(TAG, "open system browser", onoff);
-                Uri uri = Uri.parse(responseAd.getTarget_url());
+                Uri uri = Uri.parse(responseAd.getTargetUrl());
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 PackageManager manager = activity.getPackageManager();
                 List<ResolveInfo> activities = manager.queryIntentActivities(

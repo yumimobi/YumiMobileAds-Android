@@ -33,18 +33,18 @@ public class DownloadHandler {
     public static void startDownload(Activity activity, YumiAdBean response, boolean reload) {
         try {
             // Check whether the version number of the app installed and installed on the current device is not less than the version number of the package to be downloaded. If it is, do not download it. If not, download it.
-            String packageName = response.getApp_bundle();
+            String packageName = response.getAppBundle();
             if (packageName == null || "".equals(packageName) || "null".equals(packageName)) {
                 packageName = String.valueOf(System.currentTimeMillis());
-                response.setApp_bundle(packageName);
+                response.setAppBundle(packageName);
             }
-            String versionCode = response.getApp_ver();
-            String fileName = response.getDownload_file_name();
+            String versionCode = response.getAppVer();
+            String fileName = response.getDownloadFileName();
             if (fileName == null || "".equals(fileName) || "null".equals(fileName)) {
-                fileName = response.getApp_bundle() + "_" + versionCode + ".apk";
-                response.setDownload_file_name(fileName);
+                fileName = response.getAppBundle() + "_" + versionCode + ".apk";
+                response.setDownloadFileName(fileName);
             }
-            String url = response.getTarget_url();
+            String url = response.getTargetUrl();
             ZplayDebug.v_m(TAG, "download url" + url, onoff);
 
             packageName = packageName.trim();
@@ -53,7 +53,7 @@ public class DownloadHandler {
 
             // Check if it is in the download list
             DownloadDB db = DownloadDB.getInstance(activity);
-            DownloadListItem item = db.selectData("resurl", response.getApp_bundle());
+            DownloadListItem item = db.selectData("resurl", response.getAppBundle());
             if (item == null) {
                 handleDownloadStuff(activity, response);
             } else {
@@ -135,10 +135,10 @@ public class DownloadHandler {
     }
 
     private static void handleDownloadStuff(Activity activity, YumiAdBean response) {
-        String fileName = response.getDownload_file_name();
+        String fileName = response.getDownloadFileName();
 
         DownloadManager downloadManager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(response.getTarget_url());
+        Uri uri = Uri.parse(response.getTargetUrl());
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDescription(fileName + " downloading...").setTitle(fileName);
         File apkDir = new File(FileHandler.getSDRootDIR(activity) + Constants.dir.DIR_APK);
@@ -157,10 +157,10 @@ public class DownloadHandler {
                 DownloadListItem item = new DownloadListItem(
                         String.valueOf(downloadID),
                         response.getId(),
-                        response.getTarget_url(),
+                        response.getTargetUrl(),
                         file.getPath(),
                         DownloadDB.DOWNLOAD_ING,
-                        response.getApp_download_trackers()
+                        response.getAppDownloadFinishTrackers()
                 );
                 long insertData = DownloadDB.getInstance(activity).insertData(item);
                 ZplayDebug.w_m(TAG, "DB status code：" + insertData, onoff);
@@ -185,8 +185,8 @@ public class DownloadHandler {
                     null,
                     null,
                     null);
-            ZplayDebug.v_m(TAG, "Report start download event：getClickdownloadTrackerUrl：" + response.getApp_download_trackers(), onoff);
-            Reporter.reportEvent(activity, response.getApp_download_trackers(), entity);
+            ZplayDebug.v_m(TAG, "Report start download event：getClickdownloadTrackerUrl：" + response.getAppDownloadTrackers(), onoff);
+            Reporter.reportEvent(activity, response.getAppDownloadTrackers(), entity);
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "reportDownloadStartBI error : ", e, onoff);
         }

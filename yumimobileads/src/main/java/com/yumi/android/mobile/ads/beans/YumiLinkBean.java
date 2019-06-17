@@ -5,8 +5,8 @@ public class YumiLinkBean {
     private String url;
     private String clicktracker;
     private int type;
-    private String fallback_url;
-    private int fallback_action;
+    private String fallbackUrl;
+    private int fallbackAction;
 
     public String getUrl() {
         return url;
@@ -20,12 +20,12 @@ public class YumiLinkBean {
         return type;
     }
 
-    public String getFallback_url() {
-        return fallback_url;
+    public String getFallbackUrl() {
+        return fallbackUrl;
     }
 
-    public int getFallback_action() {
-        return fallback_action;
+    public int getFallbackAction() {
+        return fallbackAction;
     }
 
 }

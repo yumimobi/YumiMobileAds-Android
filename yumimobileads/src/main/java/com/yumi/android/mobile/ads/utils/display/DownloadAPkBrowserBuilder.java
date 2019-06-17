@@ -182,7 +182,7 @@ public class DownloadAPkBrowserBuilder {
                 ZplayDebug.v_m(TAG, "The file suffix pointed to by the link is：" + extension, onoff);
                 if (extension.trim().toLowerCase().equals("apk")) {
                             ZplayDebug.v_m(TAG, "is apk file，start download...", onoff);
-                            responseBid.setTarget_url(url);
+                            responseBid.setTargetUrl(url);
                             DownloadHandler.startDownload(activity, responseBid, false);
                             dialog.dismiss();
                 } else {
@@ -190,7 +190,7 @@ public class DownloadAPkBrowserBuilder {
                 }
             }
         });
-        explorer.loadUrl(responseBid.getTarget_url());
+        explorer.loadUrl(responseBid.getTargetUrl());
         dialog.show();
     }
 

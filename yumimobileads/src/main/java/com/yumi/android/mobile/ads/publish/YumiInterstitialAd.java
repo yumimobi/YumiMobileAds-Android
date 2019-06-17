@@ -321,20 +321,20 @@ public class YumiInterstitialAd extends Control {
             }
 
             if (responseAd.getAction() == Constants.actiontype.ACTION_TYPE_DEEPLINK) {
-                String deeplinkUrl = responseAd.getTarget_url();
+                String deeplinkUrl = responseAd.getTargetUrl();
                 if (!TextUtils.isEmpty(deeplinkUrl)) {
                     boolean handleDeeplink = ThirdAppStarter.startBrowser(activity, deeplinkUrl);
                     if (!handleDeeplink) {
-                        responseAd.setTarget_url(responseAd.getFallback_url());
+                        responseAd.setTargetUrl(responseAd.getFallbackUrl());
                         ZplayHandlerClickActionUtils.handleClickAction(responseAd, activity, view, AdType.TYPE_BANNER);
                     }
                 } else {
-                    responseAd.setTarget_url(responseAd.getFallback_url());
+                    responseAd.setTargetUrl(responseAd.getFallbackUrl());
                     ZplayHandlerClickActionUtils.handleClickAction(responseAd, activity, view, AdType.TYPE_BANNER);
                 }
             } else {
-                if (TextUtils.isEmpty(responseAd.getTarget_url()) || responseAd.getTarget_url().equals("")) {
-                    responseAd.setTarget_url(url);
+                if (TextUtils.isEmpty(responseAd.getTargetUrl()) || responseAd.getTargetUrl().equals("")) {
+                    responseAd.setTargetUrl(url);
                 }
                 ZplayHandlerClickActionUtils.handleClickAction(responseAd, activity, view, AdType.TYPE_BANNER);
             }
@@ -411,9 +411,9 @@ public class YumiInterstitialAd extends Control {
 
             ReportEntity entity = new ReportEntity(
                     null,
-                    responseAd.getClick_trackers(),
+                    responseAd.getClickTrackers(),
                     touchArea);
-            Reporter.reportEvent(activity, responseAd.getClick_trackers(), entity);
+            Reporter.reportEvent(activity, responseAd.getClickTrackers(), entity);
         } catch (Exception e) {
             ZplayDebug.v_m(TAG, "onInterstitialClick report error", onoff);
         }
@@ -427,10 +427,10 @@ public class YumiInterstitialAd extends Control {
             YumiResponseBean response = (YumiResponseBean) wv.getTag();
             YumiAdBean responseAd = response.getFirstAd();
             ReportEntity entity = new ReportEntity(
-                    responseAd.getImp_trackers(),
+                    responseAd.getImpTrackers(),
                     null,
                     null);
-            Reporter.reportEvent(activity, responseAd.getImp_trackers(), entity);
+            Reporter.reportEvent(activity, responseAd.getImpTrackers(), entity);
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "onInterstitialShow report error", e, onoff);
         }
@@ -447,7 +447,7 @@ public class YumiInterstitialAd extends Control {
                     null,
                     null,
                     null);
-            Reporter.reportEvent(activity, responseAd.getClose_trackers(), entity);
+            Reporter.reportEvent(activity, responseAd.getCloseTrackers(), entity);
         } catch (Exception e) {
             ZplayDebug.e_m(TAG, "onInterstitialClose report error", e, onoff);
         }

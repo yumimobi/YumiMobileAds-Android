@@ -7,67 +7,67 @@ import java.util.List;
 
 public class YumiAdBean {
      private String id;
-     private String place_id;
+     private String placeId;
      private int action;
-     private String html_snippet;
-     private String image_url;
+     private String htmlSnippet;
+     private String imageUrl;
      private int w;
      private int h;
 
-     private String app_bundle;
-     private String store_bundle;
-     private String app_ver;
+     private String appBundle;
+     private String storeBundle;
+     private String appVer;
 
-     private String target_url;
+     private String targetUrl;
 
-     private List<String> click_trackers;
-     private List<String> imp_trackers;
-     private List<String> close_trackers;
-     private List<String> app_download_trackers;
-     private List<String> app_download_finish_trackers;
-     private List<String> app_activate_trackers;
+     private List<String> clickTrackers;
+     private List<String> impTrackers;
+     private List<String> closeTrackers;
+     private List<String> appDownloadTrackers;
+     private List<String> appDownloadFinishTrackers;
+     private List<String> appActivateTrackers;
 
 
-     private int refresh_interval;
-     private int inventory_type;
+     private int refreshInterval;
+     private int inventoryType;
 
      private String title;
      private String desc;
-     private String ssp_id;
+     private String sspId;
 
-     private String download_file_name;
-     private int file_size;
+     private String downloadFileName;
+     private int fileSize;
      private float price;
-     private String ex_param;
-     private String ssp_ad_id;
+     private String exParam;
+     private String sspAdId;
 
      private YumiVideoBean video;
      @SerializedName("native")
      private YumiNativeBean nativeBean;
 
      private YumiZplayBean zplay;
-     private String logo_url;
-     private String fallback_url;
-     private int fallback_action;
+     private String logoUrl;
+     private String fallbackUrl;
+     private int fallbackAction;
 
      public String getId() {
           return id;
      }
 
-     public String getPlace_id() {
-          return place_id;
+     public String getPlaceId() {
+          return placeId;
      }
 
      public int getAction() {
           return action;
      }
 
-     public String getHtml_snippet() {
-          return html_snippet;
+     public String getHtmlSnippet() {
+          return htmlSnippet;
      }
 
-     public String getImage_url() {
-          return image_url;
+     public String getImageUrl() {
+          return imageUrl;
      }
 
      public int getW() {
@@ -78,61 +78,61 @@ public class YumiAdBean {
           return h;
      }
 
-     public String getApp_bundle() {
-          return app_bundle;
+     public String getAppBundle() {
+          return appBundle;
      }
 
-     public void setApp_bundle(String app_bundle) {
-          this.app_bundle = app_bundle;
+     public void setAppBundle(String appBundle) {
+          this.appBundle = appBundle;
      }
 
-     public String getStore_bundle() {
-          return store_bundle;
+     public String getStoreBundle() {
+          return storeBundle;
      }
 
-     public String getApp_ver() {
-          return app_ver;
+     public String getAppVer() {
+          return appVer;
      }
 
-     public String getTarget_url() {
-          return target_url;
+     public String getTargetUrl() {
+          return targetUrl;
      }
 
-     public void setTarget_url(String target_url) {
-          this.target_url = target_url;
+     public void setTargetUrl(String targetUrl) {
+          this.targetUrl = targetUrl;
      }
 
-     public List<String> getClick_trackers() {
-          return click_trackers;
+     public List<String> getClickTrackers() {
+          return clickTrackers;
      }
 
-     public List<String> getImp_trackers() {
-          return imp_trackers;
+     public List<String> getImpTrackers() {
+          return impTrackers;
      }
 
-     public List<String> getClose_trackers() {
-          return close_trackers;
+     public List<String> getCloseTrackers() {
+          return closeTrackers;
      }
 
 
-     public List<String> getApp_download_trackers() {
-          return app_download_trackers;
+     public List<String> getAppDownloadTrackers() {
+          return appDownloadTrackers;
      }
 
-     public List<String> getApp_download_finish_trackers() {
-          return app_download_finish_trackers;
+     public List<String> getAppDownloadFinishTrackers() {
+          return appDownloadFinishTrackers;
      }
 
-     public List<String> getApp_activate_trackers() {
-          return app_activate_trackers;
+     public List<String> getAppActivateTrackers() {
+          return appActivateTrackers;
      }
 
-     public int getRefresh_interval() {
-          return refresh_interval;
+     public int getRefreshInterval() {
+          return refreshInterval;
      }
 
-     public int getInventory_type() {
-          return inventory_type;
+     public int getInventoryType() {
+          return inventoryType;
      }
 
      public String getTitle() {
@@ -143,32 +143,32 @@ public class YumiAdBean {
           return desc;
      }
 
-     public String getSsp_id() {
-          return ssp_id;
+     public String getSspId() {
+          return sspId;
      }
 
-     public String getDownload_file_name() {
-          return download_file_name;
+     public String getDownloadFileName() {
+          return downloadFileName;
      }
 
-     public void setDownload_file_name(String download_file_name) {
-          this.download_file_name = download_file_name;
+     public void setDownloadFileName(String downloadFileName) {
+          this.downloadFileName = downloadFileName;
      }
 
-     public int getFile_size() {
-          return file_size;
+     public int getFileSize() {
+          return fileSize;
      }
 
      public float getPrice() {
           return price;
      }
 
-     public String getEx_param() {
-          return ex_param;
+     public String getExParam() {
+          return exParam;
      }
 
-     public String getSsp_ad_id() {
-          return ssp_ad_id;
+     public String getSspAdId() {
+          return sspAdId;
      }
 
      public YumiVideoBean getVideo() {
@@ -183,16 +183,16 @@ public class YumiAdBean {
           return zplay;
      }
 
-     public String getLogo_url() {
-          return logo_url;
+     public String getLogoUrl() {
+          return logoUrl;
      }
 
-     public String getFallback_url() {
-          return fallback_url;
+     public String getFallbackUrl() {
+          return fallbackUrl;
      }
 
-     public int getFallback_action() {
-          return fallback_action;
+     public int getFallbackAction() {
+          return fallbackAction;
      }
 
 }

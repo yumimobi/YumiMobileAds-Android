@@ -3,39 +3,39 @@ package com.yumi.android.mobile.ads.beans;
 public class YumiVideoBean {
 
     private String url;
-    private int play_duration;
-    private String player_start_trackers;
-    private String player_end_trackers;
-    private String target_page_show_trackers;
-    private String target_page_click_trackers;
-    private String target_page_close_trackers;
+    private int playDuration;
+    private String playerStartTrackers;
+    private String playerEndTrackers;
+    private String targetPageShowTrackers;
+    private String targetPageClickTrackers;
+    private String targetPageCloseTrackers;
 
     public String getUrl() {
         return url;
     }
 
-    public int getPlay_duration() {
-        return play_duration;
+    public int getPlayDuration() {
+        return playDuration;
     }
 
-    public String getPlayer_start_trackers() {
-        return player_start_trackers;
+    public String getPlayerStartTrackers() {
+        return playerStartTrackers;
     }
 
-    public String getPlayer_end_trackers() {
-        return player_end_trackers;
+    public String getPlayerEndTrackers() {
+        return playerEndTrackers;
     }
 
-    public String getTarget_page_show_trackers() {
-        return target_page_show_trackers;
+    public String getTargetPageShowTrackers() {
+        return targetPageShowTrackers;
     }
 
-    public String getTarget_page_click_trackers() {
-        return target_page_click_trackers;
+    public String getTargetPageClickTrackers() {
+        return targetPageClickTrackers;
     }
 
-    public String getTarget_page_close_trackers() {
-        return target_page_close_trackers;
+    public String getTargetPageCloseTrackers() {
+        return targetPageCloseTrackers;
     }
 
 
