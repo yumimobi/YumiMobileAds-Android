@@ -34,7 +34,7 @@ dependencies {
 
 //    implementation project(':yumimobileads')
 
-    implementation 'com.yumimobi.ads:yumimobileads:0.1.4'
+    implementation 'com.yumimobi.ads:yumimobileads:1.0.0'
 
     implementation('com.mopub:mopub-sdk:5.6.0@aar') {
         transitive = true
